@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Navigation.css';
+import '../App.css';
 
 class Navigation extends Component {
     render() {
@@ -15,7 +15,7 @@ class Navigation extends Component {
                             <a class="nav-link" href="">Empezar entrenamiento</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Detalle de entrenamiento</a>
+                            <a class="nav-link" href="">Detalle de perfil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">Cambiar perfil</a>

@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import '../App.css';
+import Navigation from './Navigation';
 
 class Home extends Component {
     render() {
         return (
-            <di>
+            <div>
+                <Navigation></Navigation>
                 <h1>Aca iran las instrucciones de la app</h1>
-            </di>
+            </div>
         )
      }
 }

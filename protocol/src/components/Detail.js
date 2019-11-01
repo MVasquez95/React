@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import '../App.css';
+import Navigation from './Navigation';
 
 class Detail extends Component {
     render() {
         return (
-            <di>
+            <div>
+                <Navigation></Navigation>
                 <h1>Aca irá el detalle del perfil</h1>
-            </di>
+            </div>
         )
      }
 }

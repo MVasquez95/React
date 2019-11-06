@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
 import '../App.css';
-import Navigation from './Navigation';
+import {Link} from 'react-router-dom';
 
 class Detail extends Component {
     render() {
         return (
             <div>
-                <Navigation></Navigation>
                 <h1>Aca irá el detalle del perfil</h1>
+                    <Link to="/home">
+                        <button className = "btn btn-primary">
+                            Regresar
+                        </button>
+                    </Link>
             </div>
         )
      }

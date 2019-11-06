@@ -1,13 +1,20 @@
 import React, {Component} from 'react';
 import '../App.css';
-import Navigation from './Navigation';
+import Unity, { UnityContent } from "react-unity-webgl";
 
-class Training extends Component {
+class Training extends Component {    
+    constructor(props) {
+        super(props);
+     
+        this.unityContent = new UnityContent(
+          "../Build/GrazWeb.json",
+          "../Build/UnityLoader.js"
+        );
+      }
     render() {
         return (
             <div>
-                <Navigation></Navigation>
-                <h1>Aca irá el entrenamiento</h1>
+                <Unity unityContent={this.unityContent} />;
             </div>
         )
      }

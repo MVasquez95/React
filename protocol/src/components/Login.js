@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../App.css';
 import {users} from '../users.json';
 import UserForm from './UserForm';
+import {Link} from 'react-router-dom';
 
 class Login extends Component {
     constructor() {
@@ -43,6 +44,11 @@ class Login extends Component {
                             <p>Protocolo de entrenamiento: {user.protocol}</p>
                         </div>
                         <div className = "card-footer">
+                            <Link to="/home">
+                                <button className = "btn btn-primary">
+                                    Seleccionar
+                                </button>
+                            </Link>
                             <button className = "btn btn-danger" onClick={this.handleRemoveUser.bind(this,i)}>
                                 Eliminar
                             </button>

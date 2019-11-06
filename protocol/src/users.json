@@ -4,19 +4,21 @@
             "id": "mcgal",
             "state": "2",
             "protocol": "graz",
-            "timestamps": [ 1572648948, 1572678948 ]
+            "timestamps": [ 1572648948, 1572678948 ],
+            "trains": []
         },
         {
             "id": "kjaenz",
             "state": "3",
             "protocol": "propio",
-            "timestamps": [1572648948, 1572668948, 1572678948 ]
+            "timestamps": [1572648948, 1572668948, 1572678948 ],
+            "trains": []
         },
         {
             "id": "mleon",
             "state": "4",
             "protocol": "graz",
-            "timestamps": [ 1572648948, 1572648948, 1572668948, 1572678948 ]
-        }
+            "timestamps": [ 1572648948, 1572648948, 1572668948, 1572678948 ],
+            "trains": []        }
     ]
 }

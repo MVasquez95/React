@@ -5,7 +5,8 @@ import {Link} from 'react-router-dom';
 class Home extends Component {
     render() {
         return (
-            <div>
+            <div className = "container">
+                <div className = "center">
                 <h1>Aplicación</h1>
                 <Link to="/train">
                 <button className = "btn btn-primary">
@@ -26,6 +27,7 @@ class Home extends Component {
                     Cambiar perfil
                 </button>
                 </Link>
+                </div>
             </div>
         )
      }

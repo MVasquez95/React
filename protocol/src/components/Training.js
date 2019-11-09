@@ -7,8 +7,8 @@ class Training extends Component {
         super(props);
      
         this.unityContent = new UnityContent(
-          "../Build/GrazWeb.json",
-          "../Build/UnityLoader.js"
+          "/Build/GrazWeb.json",
+          "/Build/UnityLoader.js"
         );
       }
     render() {

@@ -3,14 +3,21 @@ import '../App.css';
 import {users} from '../users.json';
 import UserForm from './UserForm';
 import {Link} from 'react-router-dom';
+import Modal from 'react-modal';
+
+
+Modal.setAppElement()
 
 class Login extends Component {
     constructor() {
         super();
         this.state = {
-            users
+            users,
+            modalIsOpen: false
         };
         this.handleAddUser = this.handleAddUser.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     handleAddUser(user) {
@@ -28,6 +35,15 @@ class Login extends Component {
             })
         }
     }
+
+    openModal() {
+        this.setState({modalIsOpen: true});
+    }
+     
+    closeModal() {
+        this.setState({modalIsOpen: false});
+    }
+
 
     render() {
         const users = this.state.users.map((user,i) => {
@@ -59,11 +75,26 @@ class Login extends Component {
         })
         return (
             <div className = "App">
+                <nav class="navbar navbar-dark bg-dark">
+                    <button onClick={this.openModal} className = "btn btn-primary">
+                        Agregar Usuario
+                    </button>
+                    <Modal
+                    
+                        isOpen={this.state.modalIsOpen}
+                        onRequestClose={this.closeModal}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                        >
+                            <UserForm onAddUser= {this.handleAddUser}/>
+                            <button onClick={this.closeModal} className = "btn btn-danger" >
+                                Cerrar
+                            </button>
+                    </Modal>
+                </nav>
                 <div className = "container">
                     <div className = "row mt-4">
-                        <div className = "col-md-3">
-                            <UserForm onAddUser= {this.handleAddUser}/>
-                        </div>
                         <div className = "col-md-9">
                             <div className = "row">
                             {users}

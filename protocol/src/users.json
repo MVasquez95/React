@@ -5,20 +5,21 @@
             "state": "2",
             "protocol": "graz",
             "timestamps": [ 1572648948, 1572678948 ],
-            "trains": []
+            "trains": [{"userid":"mcgal","sesion":"1", "movimiento": "derecha", "intento":"2", "fecha": "21/07/19" }]
         },
         {
             "id": "kjaenz",
             "state": "3",
             "protocol": "propio",
             "timestamps": [1572648948, 1572668948, 1572678948 ],
-            "trains": []
+            "trains": [{"userid":"kjaenz","sesion":"2", "movimiento": "izquierda", "intento":"3", "fecha": "28/02/19" }]
         },
         {
             "id": "mleon",
             "state": "4",
             "protocol": "graz",
             "timestamps": [ 1572648948, 1572648948, 1572668948, 1572678948 ],
-            "trains": []        }
+            "trains": [{"userid":"mleon","sesion":"3", "movimiento": "centro", "intento":"4", "fecha": "03/04/19" }]        
+        }
     ]
 }

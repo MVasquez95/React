@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../App.css';
-import {Link} from 'react-router-dom';
-import {users} from '../users.json';
+import { Link } from 'react-router-dom';
+import { users } from '../users.json';
 
 class Detail extends Component {
     constructor() {
@@ -11,9 +11,10 @@ class Detail extends Component {
         };
     }
     render() {
-        const users = this.state.users.map((user,i) => {
-            return(
-                <table className = "blueTable">
+        console.log(this.state.users[0]);
+        return (
+            <div>
+                <table className="blueTable">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -24,26 +25,21 @@ class Detail extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">{i}</th>
-                            <td>{user.id}</td>
-                            <td>{user.state}</td>
-                            <td>{user.protocol}</td>
+                            <th scope="row">{1}</th>
+                            <td>{this.state.users[0].id}</td>
+                            <td>{this.state.users[0].state}</td>
+                            <td>{this.state.users[0].protocol}</td>
                         </tr>
                     </tbody>
                 </table>
-            )
-        })
-        return (
-            <div>
-                {users}
-                    <Link to="/home">
-                        <button className = "btn btn-primary">
-                            Regresar
-                        </button>
-                    </Link>
+                <Link to="/home">
+                    <button className="btn btn-primary">
+                        Regresar
+                </button>
+                </Link>
             </div>
         )
-     }
+    }
 }
 
 export default Detail;

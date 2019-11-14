@@ -19,7 +19,7 @@ class Home extends Component {
         <div className="title-container">
           <h1>Aplicación de interfaz cerebro-computadora (BCI) para interacción asistida en videojuego</h1>
         </div>
-        <div className="options-mega">
+        <div>
           <div className="options">
             <Link to="/train" style={{ textDecoration: 'none', color: 'black' }}>
               <div className="button-on-home">

@@ -9,9 +9,7 @@
   /* Positioning */
   position: fixed;
   top: 25%;
-  /* left: 25%; */
   left: 50%;
-  /* box-sizing: border-box; */
 }
 
 .outer-border h1 {
@@ -35,8 +33,6 @@
   
   /* Display */
   white-space: nowrap;
-  /* display: flex;
-  flex-wrap: nowrap; */
   overflow-x: auto;
   overflow-y: hidden;
 }

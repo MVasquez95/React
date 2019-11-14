@@ -20,7 +20,9 @@ class NewProfileCard extends Component {
     })
   }
 
-  // this.props.returnToList()
+  addUser = () => {
+    this.props.pickerRefresh()
+  }
 
   render() {
     return (

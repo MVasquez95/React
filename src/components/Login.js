@@ -7,7 +7,6 @@ import { users } from '../users.json';
 
 import Modal from 'react-modal';
 import ProfilePicker from '../profile/ProfilePicker';
-import BackgroundImage from '../BackGroundImage';
 
 Modal.setAppElement()
 
@@ -21,6 +20,9 @@ class Login extends Component {
     this.handleAddUser = this.handleAddUser.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+
+    let lastUser = localStorage.getItem("bciuser");
+    console.log("Last user saved: ", JSON.parse(lastUser))
   }
 
   handleAddUser(user) {
@@ -49,9 +51,9 @@ class Login extends Component {
 
 
   render() {
-     return (
+    return (
       <div className="App">
-        <BackgroundImage />
+        <div style={{ width: "1px", height: "1px" }}></div>
         <ProfilePicker />
       </div>
     );

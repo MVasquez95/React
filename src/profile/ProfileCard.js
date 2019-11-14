@@ -14,7 +14,9 @@ class ProfileCard extends Component {
 
   componentDidMount = () => {
     let { user } = this.props;
+
     if (!user) return;
+    
     this.setState({
       userid: user.userid,
       protocol: user.protocol,
@@ -23,15 +25,18 @@ class ProfileCard extends Component {
   }
 
   loginUser = () =>  {
-    console.log("lets log this mothafacka")
-    console.log(this.state.userid)
-    console.log(this.state.protocol)
+    console.log("Saving user to localStorage")
+    let user = { 
+      userid: this.state.userid,
+      protocol: this.state.protocol,
+    }
+    localStorage.setItem("bciuser", JSON.stringify(user));
   }
   
   deleteUser = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("lets delete this mothafacka")
+    console.log("Delete user not implemented!")
   }
 
   render() {

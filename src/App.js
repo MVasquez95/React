@@ -5,11 +5,13 @@ import Training from './components/Training';
 import Detail from './components/Detail';
 import Home from './components/Home';
 import Login from './components/Login';
+import BackgroundImage from './BackGroundImage';
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <BackgroundImage />
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/train" exact component={Training} />

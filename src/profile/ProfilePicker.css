@@ -4,6 +4,7 @@
   width: 800px;
   border-radius: 25px;
   background-color:#4DA5F3;
+  /* background-color: #546e7a; */
   margin-left: -400px;
   
   /* Positioning */
@@ -23,6 +24,7 @@
   padding: 20px 5px;
   border-radius: 25px;
   background-color:#3F87C7;
+  /* background-color:#819ca9; */
   margin-left: -375px;
   box-sizing: border-box;
 

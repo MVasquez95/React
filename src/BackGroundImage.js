@@ -13,17 +13,15 @@ class BackGroundImage extends Component {
         top: "0",
         left: "0",
         //
-        filter: "blur(2px)",
+        filter: "blur(3px)",
         zIndex: "-1"
       }}>
         <img src={epoc} alt="Fuente: emotiv.com" style={{
           position: "absolute",
           top: "30%",
-          left: "30%",
+          left: "50%",
           //
-          bottom: "25%",
-          right: "25%",
-          transform: "scale(2.3)"
+          transform: "translateX(-50%) scale(2.3)"
         }}/>
       </div>
     );

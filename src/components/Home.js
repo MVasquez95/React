@@ -6,6 +6,10 @@ import OptionButton from '../common/OptionButton';
 import ChangeProfileButton from '../common/ChangeProfileButton';
 
 class Home extends Component {
+
+  
+
+
   render() {
     return (
       <div className="home">
@@ -20,7 +24,7 @@ class Home extends Component {
             text="Empezar entrenamiento" />
           <OptionButton route="/detail"
             text="Detalle de perfil" />
-          <OptionButton route="/detail"
+          <OptionButton route="/feedback"
             text="FeedBack" />
         </div>
       </div>

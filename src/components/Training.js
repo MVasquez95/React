@@ -24,10 +24,11 @@ class Training extends Component {
       // this.startTrial("right");
     });
     
-    // this.unityContent.on("ready", _ => {
+    this.unityContent.on("ready", _ => {
+      console.log("cmon");
     //   this.setState({ isGameStarted: false })
     // this.startTrial("right");
-    // });
+    });
   }
 
   escFunction = (event) => {
@@ -38,6 +39,7 @@ class Training extends Component {
   componentDidMount() {
     document.addEventListener("keydown", this.escFunction, false);
   }
+
   componentWillUnmount() {
     document.removeEventListener("keydown", this.escFunction, false);
   }
@@ -51,7 +53,7 @@ class Training extends Component {
       this.unityContent.send(
         "ReactCollector",
         "startGraz",
-        mov
+        mov + ",training"
         // movement
         // "ella no te ama"
       );
@@ -68,8 +70,12 @@ class Training extends Component {
         width: "100%",
         height: "100%",
       }}>
-        {!this.state.isGameStarted && <div className="start-button left" onClick={() => this.startTrial("left")}>Left</div>}
-        {!this.state.isGameStarted && <div className="start-button right" onClick={() => this.startTrial("right")}>Right</div>}
+        {!this.state.isGameStarted && 
+          <div className="start-button left" onClick={() => this.startTrial("left")}>Left</div>
+        }
+        {!this.state.isGameStarted && 
+          <div className="start-button right" onClick={() => this.startTrial("right")}>Right</div>
+        }
         <Unity unityContent={this.unityContent} />;
       </div>
     )

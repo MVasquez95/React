@@ -41,7 +41,7 @@ class Picker extends Component {
 
   render() {
     let profiles = this.state.users.map((u, i) => <ProfileCard key={i} user={u} />)
-    let list = (
+    let listMode = (
       <div className="outer-border">
         <h1>Selecciona tu perfil</h1>
         <div className="add-button" onClick={this.addUser}>
@@ -58,7 +58,7 @@ class Picker extends Component {
         </div>
       </div>
     )
-    let add = (
+    let addMode = (
       <div className="outer-border">
         <h1>Elige un nombre de usuario</h1>
         <div className="cancel-button" onClick={this.cancelAddUser}>
@@ -71,8 +71,8 @@ class Picker extends Component {
     )
     return (
       <div>
-        {this.state.mode === "list" && list}
-        {this.state.mode === "add" && add}
+        {this.state.mode === "list" && listMode}
+        {this.state.mode === "add" && addMode}
       </div>
     )
   }

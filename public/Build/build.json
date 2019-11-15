@@ -2,9 +2,9 @@
 "companyName": "DefaultCompany",
 "productName": "Graz Protocol",
 "productVersion": "0.1",
-"dataUrl": "GrazWeb.data.unityweb",
-"wasmCodeUrl": "GrazWeb.wasm.code.unityweb",
-"wasmFrameworkUrl": "GrazWeb.wasm.framework.unityweb",
+"dataUrl": "build.data.unityweb",
+"wasmCodeUrl": "build.wasm.code.unityweb",
+"wasmFrameworkUrl": "build.wasm.framework.unityweb",
 "graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
 "splashScreenStyle": "Dark",
@@ -12,5 +12,5 @@
 "cacheControl": {"default": "must-revalidate"},
 "developmentBuild": false,
 "multithreading": false,
-"unityVersion": "2019.2.11f1"
+"unityVersion": "2019.2.3f1"
 }

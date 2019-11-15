@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import epoc from './images/epoc.png'
+import epoc from './images/head.png'
 
 class BackGroundImage extends Component {
   render() {
@@ -13,7 +13,7 @@ class BackGroundImage extends Component {
         top: "0",
         left: "0",
         //
-        filter: "blur(3px)",
+        filter: "blur(0px)",
         zIndex: "-1"
       }}>
         <img src={epoc} alt="Fuente: emotiv.com" style={{
@@ -21,7 +21,7 @@ class BackGroundImage extends Component {
           top: "30%",
           left: "50%",
           //
-          transform: "translateX(-50%) scale(2.3)"
+          transform: "translateX(-50%) scale(1.5)"
         }}/>
       </div>
     );

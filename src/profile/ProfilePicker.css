@@ -2,7 +2,6 @@
   /* Box Model */
   height: 400px;
   width: 800px;
-  border-radius: 25px;
   background-color:#4DA5F3;
   margin-left: -400px;
   
@@ -48,4 +47,35 @@
 .add-button:hover {
   cursor: pointer;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cancel-button {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  border-radius: 50%;
+  background-color: white;
+  transform: rotate(45deg);
+}
+
+.cancel-button:hover {
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.loading-image {
+  overflow: hidden;
+  height: 160px;
+  width: 160px;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) ;
+}
+
+.loading-image img {
+  position: relative;
+  bottom: 130px;
+  right: 300px;
 }

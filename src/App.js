@@ -10,7 +10,7 @@ import FeedBack from './components/FeedBack';
 
 import BackgroundImage from './BackGroundImage';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="App">

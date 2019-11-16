@@ -1,4 +1,4 @@
-.change-profile-button {
+.top-righ-button {
   position: fixed;
   top: 30px;
   right: 10px;
@@ -9,7 +9,7 @@
   color: coral;
 }
 
-.change-profile-button:hover {
+.top-righ-button:hover {
   box-shadow: 0px 0px 8px black;
   cursor: pointer;
 }

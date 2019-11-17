@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import './Detail.css'
+import './Detail.scss'
 import './circle.css'
 import BackHomeButton from '../common/BackHomeButton';
 
@@ -18,40 +18,40 @@ class Detail extends Component {
     Promise.all([fetch(`http://localhost:4000/users/${userS.userid}`), fetch(`http://localhost:4000/daemon/info`)])
       .then(responses => Promise.all(responses.map(r => r.json())))
       .then(([user, info]) => {
-        console.log(user, info)
-        // This compare the info between database and daemon
-        let sameUserID = user.userid === info.userid
-        let sameFileLen = user.timestamps.length === info.len
-        // pending
-        // let sameLastState = false
-        let isSynchronized = sameUserID && sameFileLen
-        console.log("Synchronized: ", sameUserID, sameFileLen)
-        console.log("isSynchronized: ", isSynchronized)
-        user.timestamps.reverse()
+        console.log(user, info);
+        let isSynchronized = this.compareUserAndInfo(user, info);
+        user.timestamps.reverse();
         this.setState({ user, info, isSynchronized })
       })
+  }
+
+  compareUserAndInfo = (user, info) => {
+    let sameUserID = user.userid === info.userid
+    let sameFileLen = user.timestamps.length === info.len
+    // let sameLastState = false
+    console.log("Synchronizing: ", sameUserID, sameFileLen)
+    let isSynchronized = sameUserID && sameFileLen
+    console.log("isSynchronized: ", isSynchronized)
+    // let isSynchronized = sameUserID && sameFileLen && sameLastState 
+    return isSynchronized;
   }
 
   train = () => {
     // disabled button inmediatly then activate if there is an error
 
     if (!this.state.isSynchronized) {
-      console.log("should train ", this.state.user.userid )
+      console.log("should train ", this.state.user.userid)
       fetch(`http://localhost:4000/training/train`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userid: this.state.user.userid }),
       })
-      .then(response => response.json())
-      .then(info => {
-        console.log(info)
-        let sameUserID = this.state.user.userid === info.userid
-        let sameFileLen = this.state.user.timestamps.length === info.len
-        // pending
-        // let sameLastState = false
-        let isSynchronized = sameUserID && sameFileLen
-        this.setState({ info, isSynchronized })
-      })
+        .then(response => response.json())
+        .then(info => {
+          console.log(info)
+          let isSynchronized = this.compareUserAndInfo(this.state.user, info)
+          this.setState({ info, isSynchronized })
+        })
     }
   }
 

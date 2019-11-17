@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import Unity, { UnityContent } from "react-unity-webgl";
 import { Redirect } from 'react-router-dom';
+import { setInterval } from 'timers';
 // import './Training.css'
 
 class FeedBack extends Component {
@@ -11,7 +12,10 @@ class FeedBack extends Component {
     isGameStarted: false,
   }
 
-  callingFeedBack = null;
+  feedbackInterval = null;
+
+  feedbackchannel = null;
+  // feedbackchannel = new WebSocket('ws://localhost:8081/training/feedback');
 
   constructor(props) {
     super(props);
@@ -27,17 +31,52 @@ class FeedBack extends Component {
     });
 
     this.unityContent.on("feedBackReady", _ => {
-      console.log("it is ready baby")
-      this.callingFeedBack = setInterval(() => {
-        this.unityContent.send("FeedBackManager", "applyFeedBack", 0.01)
-      }, 100)
-    });
 
+      this.feedbackchannel = new WebSocket('ws://localhost:8081/training/feedback');
+      console.log(this.feedbackchannel)
+      // this.feedbackchannel.on('open', () => {
+      this.feedbackchannel.onopen = () => {
+        console.log("connected")
+        let user = JSON.parse(localStorage.getItem("bciuser"));
+
+        let predictMessage = {
+          action: "predict",
+          userid: user.userid,
+        }
+
+        this.feedbackInterval = setInterval(() => {
+          this.feedbackchannel.send(JSON.stringify(predictMessage));
+        }, 1500)
+
+      };
+
+      // this.feedbackchannel.on('message', (data, flags) => {
+      this.feedbackchannel.onmessage = (data, flags) => {
+        console.log("from global")
+        console.log(data.data);
+        let movement = JSON.parse(data.data);
+        console.log(movement)
+        console.log(movement.movement)
+        console.log(movement.movement[0])
+        if (movement.movement[0] === 0) {
+          this.unityContent.send("FeedBackManager", "applyFeedBack", 0.1)
+        } else {
+          this.unityContent.send("FeedBackManager", "applyFeedBack", -0.1)
+        }
+      };
+
+      this.feedbackchannel.onerror = (data, flags) => {
+        console.log("from global an error")
+        console.log(data)
+      };
+    });
   }
 
   escFunction = (event) => {
     if (event.keyCode === 27) {
-      this.setState({ isLeaving: true })
+      this.setState({ isLeaving: true }, () => {
+        clearInterval(this.feedbackInterval)
+      })
     }
   }
   componentDidMount() {

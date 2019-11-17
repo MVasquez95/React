@@ -74,9 +74,8 @@ class FeedBack extends Component {
 
   escFunction = (event) => {
     if (event.keyCode === 27) {
-      this.setState({ isLeaving: true }, () => {
-        clearInterval(this.feedbackInterval)
-      })
+      clearInterval(this.feedbackInterval)
+      this.setState({ isLeaving: true })
     }
   }
   componentDidMount() {

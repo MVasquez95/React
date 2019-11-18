@@ -44,7 +44,12 @@ class ProfileCard extends Component {
 
   render() {
     return (
-      <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
+      <Link to={{ 
+        pathname: "/home",
+        state: {
+          from: window.location.href
+        }
+      }} style={{ textDecoration: 'none', color: 'black' }}>
         <div className="profile-card" onClick={this.loginUser}>
           <h1>{this.state.userid || <br />}</h1>
           <div className="profile-image">

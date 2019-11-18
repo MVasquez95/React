@@ -13,17 +13,18 @@ class FeedBack extends Component {
   }
 
   feedbackInterval = null;
-
-  feedbackchannel = null;
-  // feedbackchannel = new WebSocket('ws://localhost:8081/training/feedback');
+  feedbackChannel = null;
 
   constructor(props) {
     super(props);
-
     this.unityContent = new UnityContent(
       "/Build/build.json",
       "/Build/UnityLoader.js"
     );
+  }
+
+  componentDidMount = () => {
+    document.addEventListener("keydown", this.escFunction, false);
 
     this.unityContent.on("ready", _ => {
       console.log("this should work")
@@ -31,33 +32,24 @@ class FeedBack extends Component {
     });
 
     this.unityContent.on("feedBackReady", _ => {
-
-      this.feedbackchannel = new WebSocket('ws://localhost:8081/training/feedback');
-      console.log(this.feedbackchannel)
-      // this.feedbackchannel.on('open', () => {
-      this.feedbackchannel.onopen = () => {
+      this.feedbackChannel = new WebSocket('ws://localhost:8081/training/feedback');
+      
+      this.feedbackChannel.onopen = () => {
         console.log("connected")
         let user = JSON.parse(localStorage.getItem("bciuser"));
-
         let predictMessage = {
           action: "predict",
           userid: user.userid,
         }
-
         this.feedbackInterval = setInterval(() => {
-          this.feedbackchannel.send(JSON.stringify(predictMessage));
+          this.feedbackChannel.send(JSON.stringify(predictMessage));
         }, 1500)
-
+        console.log(this.feedbackInterval._id)
       };
 
-      // this.feedbackchannel.on('message', (data, flags) => {
-      this.feedbackchannel.onmessage = (data, flags) => {
-        console.log("from global")
-        console.log(data.data);
+      this.feedbackChannel.onmessage = (data, flags) => {
         let movement = JSON.parse(data.data);
-        console.log(movement)
-        console.log(movement.movement)
-        console.log(movement.movement[0])
+        console.log("Movement from daemon: ", movement.movement[0])
         if (movement.movement[0] === 0) {
           this.unityContent.send("FeedBackManager", "applyFeedBack", 0.1)
         } else {
@@ -65,7 +57,7 @@ class FeedBack extends Component {
         }
       };
 
-      this.feedbackchannel.onerror = (data, flags) => {
+      this.feedbackChannel.onerror = (data, flags) => {
         console.log("from global an error")
         console.log(data)
       };
@@ -74,17 +66,18 @@ class FeedBack extends Component {
 
   escFunction = (event) => {
     if (event.keyCode === 27) {
-      clearInterval(this.feedbackInterval)
+      console.log("clearing interval");
+      if (this.feedbackInterval) {
+        clearInterval(this.feedbackInterval._id)
+      }
+      if (this.feedbackChannel) {
+        this.feedbackChannel.close();
+      }
       this.setState({ isLeaving: true })
     }
   }
-  componentDidMount() {
-    document.addEventListener("keydown", this.escFunction, false);
-  }
-
   componentWillUnmount() {
     document.removeEventListener("keydown", this.escFunction, false);
-    clearInterval(this.callingFeedBack)
   }
 
   render() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './TopRightButton.css'
+import './Button.scss'
 import { FaExchangeAlt } from "react-icons/fa";
 import { FiUser, FiUsers } from "react-icons/fi";
 

@@ -47,11 +47,11 @@ class Home extends Component {
             </div>
 
             <div className="options-container">
-              <OptionButton route="/train"
+              <OptionButton route="/protocol-picker"
                 text="Empezar entrenamiento" />
               <OptionButton route="/detail"
                 text="Detalle de perfil" />
-              <OptionButton route="/feedback"
+              <OptionButton route="/feedback-picker"
                 text="FeedBack" />
             </div>
           </>

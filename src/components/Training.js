@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import Unity, { UnityContent } from "react-unity-webgl";
 import { Redirect } from 'react-router-dom';
-import './Training.css'
+import './Training.scss'
 import { decodeState } from '../Utils'
 
 class Training extends Component {
@@ -84,11 +84,7 @@ class Training extends Component {
       return <Redirect to='/home' />
     }
     return (
-      <div style={{
-        position: "fixed",
-        width: "100%",
-        height: "100%",
-      }}>
+      <div className="unity-wrapper">
         {(this.state.showStartButton && !this.state.isGameStarted) &&
           <div className="start-button" onClick={this.startAndSaveTrial}>Start</div>
         }

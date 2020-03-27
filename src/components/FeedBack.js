@@ -3,10 +3,9 @@ import '../App.css';
 import Unity, { UnityContent } from "react-unity-webgl";
 import { Redirect } from 'react-router-dom';
 import { setInterval } from 'timers';
-// import './Training.css'
+import './Training.scss'
 
 class FeedBack extends Component {
-
   state = {
     isLeaving: false,
     isGameStarted: false,
@@ -43,8 +42,7 @@ class FeedBack extends Component {
         }
         this.feedbackInterval = setInterval(() => {
           this.feedbackChannel.send(JSON.stringify(predictMessage));
-        }, 1500)
-        console.log(this.feedbackInterval._id)
+        }, 1000)
       };
 
       this.feedbackChannel.onmessage = (data, flags) => {
@@ -85,11 +83,7 @@ class FeedBack extends Component {
       return <Redirect to='/home' />
     }
     return (
-      <div style={{
-        position: "fixed",
-        width: "100%",
-        height: "100%",
-      }}>
+      <div className="unity-wrapper">
         <Unity unityContent={this.unityContent} />;
       </div>
     )

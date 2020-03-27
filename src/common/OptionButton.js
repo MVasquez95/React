@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './OptionButton.css'
+import './Button.scss'
 
 const optionLink = { textDecoration: 'none', color: 'black' }
 

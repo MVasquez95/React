@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './TopRightButton.css'
+import './Button.scss'
 import { AiOutlineRollback } from "react-icons/ai";
 import { FiUser, FiUsers } from "react-icons/fi";
 

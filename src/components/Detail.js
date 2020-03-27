@@ -15,7 +15,8 @@ class Detail extends Component {
     let userS = JSON.parse(localStorage.getItem("bciuser"));
     console.log(`Last user saved (from localStorage): ${userS.userid}`)
 
-    Promise.all([fetch(`http://localhost:4000/users/${userS.userid}`), fetch(`http://localhost:4000/daemon/info`)])
+    // Promise.all([fetch(`http://localhost:4000/users/${userS.userid}`), fetch(`http://localhost:4000/daemon/info`)])
+    Promise.all([fetch(`http://18.219.150.69:4000/users/${userS.userid}`), fetch(`http://18.219.150.69:4000/daemon/info`)])
       .then(responses => Promise.all(responses.map(r => r.json())))
       .then(([user, info]) => {
         console.log(user, info);
@@ -41,7 +42,8 @@ class Detail extends Component {
 
     if (!this.state.isSynchronized) {
       console.log("should train ", this.state.user.userid)
-      fetch(`http://localhost:4000/training/train`, {
+      // fetch(`http://localhost:4000/training/train`, {
+      fetch(`http://18.219.150.69:4000/training/train`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userid: this.state.user.userid }),

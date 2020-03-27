@@ -21,7 +21,8 @@ class Home extends Component {
       // let userid = localStorage.getItem("bciuserid");
       console.log("Last user saved: ", user.userid)
       
-      fetch(`http://localhost:4000/training/train`, {
+      // fetch(`http://localhost:4000/training/train`, {
+      fetch(`http://18.219.150.69:4000/training/train`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userid: user.userid }),

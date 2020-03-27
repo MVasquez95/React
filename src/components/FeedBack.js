@@ -31,7 +31,8 @@ class FeedBack extends Component {
     });
 
     this.unityContent.on("feedBackReady", _ => {
-      this.feedbackChannel = new WebSocket('ws://localhost:8081/training/feedback');
+      // this.feedbackChannel = new WebSocket('ws://localhost:8081/training/feedback');
+      this.feedbackChannel = new WebSocket('ws://18.219.150.69:8081/training/feedback');
       
       this.feedbackChannel.onopen = () => {
         console.log("connected")

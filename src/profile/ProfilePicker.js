@@ -13,7 +13,8 @@ class Picker extends Component {
   }
 
   componentDidMount = () => {
-    fetch("http://localhost:4000/users")
+    // fetch("http://localhost:4000/users")
+    fetch("http://18.219.150.69:4000/users")
       .then(response => response.json())
       .then(users => this.setState({ users, isLoading: false }))
       .catch(err => console.log(err))

@@ -58,7 +58,8 @@ class Training extends Component {
 
       let user = JSON.parse(localStorage.getItem("bciuser"));
 
-      fetch('http://localhost:4000/training/start', {
+      // fetch('http://localhost:4000/training/start', {
+      fetch('http://18.219.150.69:4000/training/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userid: user.userid }),

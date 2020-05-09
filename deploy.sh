@@ -15,6 +15,6 @@ ssh -tt -i /home/charles/.ssh/amazon-tesis.pem ubuntu@18.219.150.69 << EOF
 cd apps/bci-front-end
 git config --global credential.helper 'cache --timeout=86400'
 git pull
-pm2 restart "node_modules/.bin/react-scripts start"
+pm2 restart "PORT=3006 node_modules/.bin/react-scripts start"
 exit
 EOF

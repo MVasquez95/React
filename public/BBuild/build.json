@@ -1,0 +1,16 @@
+{
+"companyName": "Charles",
+"productName": "BCI-Training-Protocol",
+"productVersion": "1.0",
+"dataUrl": "BCI-Training Protocol QA.data.unityweb",
+"wasmCodeUrl": "BCI-Training Protocol QA.wasm.code.unityweb",
+"wasmFrameworkUrl": "BCI-Training Protocol QA.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.3.6f1"
+}

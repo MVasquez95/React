@@ -3,27 +3,47 @@ import '../App.css';
 import './Detail.scss'
 import './circle.css'
 import BackHomeButton from '../common/BackHomeButton';
+import { endpoint } from '../Const';
+
+const trace = (x) => {
+  console.log(x)
+  return x
+}
 
 class Detail extends Component {
   state = {
     user: null,
     info: null,
     isSynchronized: true,
+    tasks: [],
   }
 
   componentDidMount = () => {
     let userS = JSON.parse(localStorage.getItem("bciuser"));
-    console.log(`Last user saved (from localStorage): ${userS.userid}`)
+    console.log(`Last user saved (from localStorage): ${userS}`)
 
-    // Promise.all([fetch(`http://localhost:4000/users/${userS.userid}`), fetch(`http://localhost:4000/daemon/info`)])
-    Promise.all([fetch(`http://18.219.150.69:4000/users/${userS.userid}`), fetch(`http://18.219.150.69:4000/daemon/info`)])
-      .then(responses => Promise.all(responses.map(r => r.json())))
-      .then(([user, info]) => {
-        console.log(user, info);
-        let isSynchronized = this.compareUserAndInfo(user, info);
-        user.timestamps.reverse();
-        this.setState({ user, info, isSynchronized })
-      })
+    // // Promise.all([fetch(`http://localhost:4000/users/${userS.userid}`), fetch(`http://localhost:4000/daemon/info`)])
+    // Promise.all([fetch(`http://18.219.150.69:4000/users/${userS.userid}`), fetch(`http://18.219.150.69:4000/daemon/info`)])
+    //   .then(responses => Promise.all(responses.map(r => r.json())))
+    //   .then(([user, info]) => {
+    //     console.log(user, info);
+    //     let isSynchronized = this.compareUserAndInfo(user, info);
+    //     user.timestamps.reverse();
+    //     this.setState({ user, info, isSynchronized })
+    //   })
+
+    // localhost:5000/api/v2/users/cazdemun/tasks
+
+    fetch(endpoint + `/users/${userS}/tasks`)
+      .then(res => res.json())
+      .then(tasks => this.setState({ tasks: trace(tasks.msg) }))
+    // .then(responses => Promise.all(responses.map(r => r.json())))
+    // .then(([user, info]) => {
+    //   console.log(user, info);
+    //   let isSynchronized = this.compareUserAndInfo(user, info);
+    //   user.timestamps.reverse();
+    //   this.setState({ user, info, isSynchronized })
+    // })
   }
 
   compareUserAndInfo = (user, info) => {
@@ -65,6 +85,14 @@ class Detail extends Component {
       </div>
     )) : null
 
+    const tasks = this.state.tasks.map(t => (
+      <div key={t.timestamp} className="row-detail">
+        {/* <p>{t.img64}</p> */}
+        <img src={`data:image/jpeg;base64,${t.img64}`} height="300" width=""/>
+        {/* <p>{JSON.stringify(t)}</p> */}
+      </div>
+    ))
+
     let infodump = this.state.info ? (
       <div className="info-dump">
         <h1>Daemon info</h1>
@@ -96,11 +124,12 @@ class Detail extends Component {
         </div>
 
         <div className="table-detail">
-          <div className="row-detail titles">
+          {/* <div className="row-detail titles">
             <p>Estado</p>
             <p>Timestamp</p>
-          </div>
-          {files}
+          </div> */}
+          {/* {files} */}
+          {tasks}
         </div>
       </div>
     )

@@ -9,7 +9,7 @@ import LoadingTraining from '../loading/LoadingTraining';
 class Home extends Component {
 
   state = {
-    isTraining: true
+    isTraining: false
   }
 
   componentDidMount = () => {
@@ -19,16 +19,16 @@ class Home extends Component {
       let user = JSON.parse(localStorage.getItem("bciuser"));
       // this.setState({ user })
       // let userid = localStorage.getItem("bciuserid");
-      console.log("Last user saved: ", user.userid)
+      console.log("Last user saved: ", user)
       
       // fetch(`http://localhost:4000/training/train`, {
-      fetch(`http://18.219.150.69:4000/training/train`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userid: user.userid }),
-      })
-      .then(response => response.json())
-      .then(_ => this.setState({ isTraining: false }))
+      // fetch(`http://18.219.150.69:4000/training/train`, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ userid: user.userid }),
+      // })
+      // .then(response => response.json())
+      // .then(_ => this.setState({ isTraining: false }))
     } else {
       this.setState({ isTraining: false })
     }
@@ -46,6 +46,8 @@ class Home extends Component {
             <div className="title-container">
               <h1>Aplicación de interfaz cerebro-computadora (BCI) para interacción asistida en videojuego</h1>
             </div>
+
+            <p style={{ backgroundColor: "white"}}>Bienvenido, {JSON.parse(localStorage.getItem("bciuser"))}</p>
 
             <div className="options-container">
               <OptionButton route="/protocol-picker"

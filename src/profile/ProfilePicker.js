@@ -4,6 +4,12 @@ import NewProfileCard from './NewProfileCard';
 import ProfileCard from './ProfileCard';
 import loading from '../images/loading.gif';
 import './ProfilePicker.css';
+import { endpoint } from '../Const'
+
+const trace = (x) => {
+  console.log(x)
+  return x
+}
 
 class Picker extends Component {
   state = {
@@ -14,9 +20,10 @@ class Picker extends Component {
 
   componentDidMount = () => {
     // fetch("http://localhost:4000/users")
-    fetch("http://18.219.150.69:4000/users")
+    // fetch("http://18.219.150.69:4000/users")
+    fetch(endpoint + "users")
       .then(response => response.json())
-      .then(users => this.setState({ users, isLoading: false }))
+      .then(users => this.setState({ users: users.msg, isLoading: false }))
       .catch(err => console.log(err))
     this.invertScrolling()
   }
@@ -41,7 +48,7 @@ class Picker extends Component {
   }
 
   render() {
-    let profiles = this.state.users.map((u, i) => <ProfileCard key={i} user={u} />)
+    let profiles = trace(this.state.users).map((u, i) => <ProfileCard key={i} user={u} />)
     let listMode = (
       <div className="outer-border">
         <h1>Selecciona tu perfil</h1>

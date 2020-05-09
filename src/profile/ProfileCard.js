@@ -18,7 +18,7 @@ class ProfileCard extends Component {
     if (!user) return;
 
     this.setState({
-      userid: user.userid,
+      userid: user.name,
       protocol: user.protocol,
       state: user.state,
       timestamps: user.timestamps,
@@ -33,7 +33,7 @@ class ProfileCard extends Component {
       state: this.state.state,
       timestamps: this.state.timestamps,
     }
-    localStorage.setItem("bciuser", JSON.stringify(user));
+    localStorage.setItem("bciuser", JSON.stringify(user.userid));
   }
 
   deleteUser = (e) => {
@@ -55,8 +55,8 @@ class ProfileCard extends Component {
           <div className="profile-image">
             <AiOutlineUser size="3em" />
           </div>
-          <p>Protocolo: {this.state.protocol}</p>
-          <p>Estado: {this.state.state}</p>
+          {/* <p>Protocolo: {this.state.protocol}</p>
+          <p>Estado: {this.state.state}</p> */}
           <div className="delete-button" onClick={this.deleteUser}>
             < MdDelete size="2em" />
           </div>

@@ -14,7 +14,7 @@ const ProtocolPicker = () =>
           text="Protocolo Graz" />
         <OptionButton route="/a-train"
           text="Protocolo A-BCI" />
-        <OptionButton route="/train"
+        <OptionButton route="/b-train"
           text="Protocolo ADICCPIAEV-BCI" />
       </div>
     </div>

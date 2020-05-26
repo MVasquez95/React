@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../App.css';
 import Unity, { UnityContent } from "react-unity-webgl";
 import { Redirect } from 'react-router-dom';
 import './Training.scss'
@@ -30,7 +29,7 @@ class Training extends Component {
       this.setState({ showStartButton: true }, () => {
         // console.log(this.movement[this.state.decodedState.movement])
         if (this.state.isGameStarted) {
-          this.startAndSaveTrial()
+          // this.startAndSaveTrial()
         }
       })
     });

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../App.css';
 import Unity, { UnityContent } from "react-unity-webgl";
 import { Redirect } from 'react-router-dom';
 import './Training.scss'

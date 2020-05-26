@@ -1,0 +1,253 @@
+import React, { useReducer, useEffect } from 'react';
+import { IconContext } from "react-icons";
+import { AiOutlineUser } from "react-icons/ai";
+import '../tailwind.generated.css';
+import { Row, Column, Button, NavLink } from './Utils';
+import Task from 'data.task'
+import { endpoint } from '../Const'
+
+/* type Input = {
+ * name, 
+ * type, 
+ * placeholder, 
+ * value, 
+ * onChange
+ * }
+ */
+const Input = ({ value, onChange }) => (<input className="text-gray-600" type="text" name="name" onChange={onChange} value={value} />)
+
+const trace = (x) => {
+  console.log(x)
+  return x;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+// - Model/Update
+
+const fetchJson = (route) => new Task((rej, res) => {
+  fetch(route)
+    .then(res => res.json())
+    .then(res)
+    .catch(rej)
+})
+
+const LoginController = () => {
+
+
+  /* type LoginMode = Adder | Picker
+   * 
+   * type alias Profile = {
+   *  username: string
+   * }
+   * 
+   * type alias Model = {
+   *  mode: LoginMode
+   *  profiles: Profile[]
+   *  newUsername: string
+   * }
+   */
+  const initialModel = {
+    mode: 'picker',
+    profiles: [
+      // {
+      //   username: "caz"
+      // },
+      // {
+      //   username: "charles",
+      // }
+    ],
+    newUsername: ''
+  }
+
+  /* type Message =
+   * CHANGE_TO_ADDER_MODE
+   * CHANGE_TO_PICKER_MODE
+   * CHANGE_NEW_USERNAME
+   * ADD_USER
+   * DELETE_USER
+   * FETCH_USERS
+   */
+  const reducer = (model, msg) => {
+    console.log(model, msg)
+    console.log(msg.type.toLowerCase())
+    switch (msg.type) {
+      case 'CHANGE_TO_PICKER_MODE':
+        return { ...model, mode: 'picker' };
+      case 'CHANGE_TO_ADDER_MODE':
+        return { ...model, mode: 'adder' };
+      case 'CHANGE_NEW_USERNAME':
+        return { ...model, newUsername: msg.payload };
+      case 'ADD_USER':
+        // lazy
+        const profiles = [...model.profiles, { username: "amadeo" }]
+        return { ...model, profiles };
+      case 'ADD_USERS':
+        return { ...model, profiles: msg.payload };
+      case 'DELETE_USER':
+        // lazy
+        return { ...model };
+      case 'MASTER':
+        return msg.payload
+      default:
+        return model
+    }
+  }
+
+  // lazy
+  // const [model, update] = useReducer(reducer, initialModel, async (e) => trace(await init(e)));
+  const [model, update] = useReducer(reducer, initialModel);
+
+  // const init = (initialModel) => fetchJson(endpoint + "users")
+  //   .map(res => res.msg)
+  //   .map(users => users.map(u => ({ username: u.name })))
+  //   .fork(_ => initialModel, profiles => ({ ...initialModel, profiles: profiles }))
+
+  useEffect(() => {
+    fetchJson(endpoint + "users")
+      .map(res => res.msg)
+      .map(users => users.map(u => ({ username: u.name })))
+      .fork(console.log, profiles => update({ type: "ADD_USERS", payload: profiles }))
+  }, []);
+
+  // fetchJson(endpoint + "users")
+  //   .map(res => res.msg)
+  //   .map(users => users.map(u => ({ username: u.name })))
+  //   .fork(_ => initialModel, profiles =>
+  //     update({
+  //         type: "MASTER",
+  //         payload: {...initialModel, profiles }
+  //         //   ...initialModel,
+  //         //   profiles: profiles
+  //         // })
+  //       }))
+
+
+  return <Login {...{ model, update }} />
+}
+
+// -- Style
+
+const ProfileCard = ({ children }) => (
+  <Column className="flex-none center-x justify-evenly mx-10 bg-gray-600 w-64 h-c-289">
+    {children}
+  </Column>)
+
+const Frame = ({ title = "Title missing", button, children }) => (
+  <Column className="center-x justify-evenly / overflow-x-hidden bg-gray-400 w-2/4 h-c-400">
+    <Row className="w-full ">
+      <Column className="center-x center-y flex-1 / ml-8">
+        <h1 className="text-gray-600 text-center text-2xl">{title}</h1>
+      </Column>
+      <Column className="self-end / mr-8">
+        {/* Go to Picker or Go to Adder */}
+        {button}
+      </Column>
+    </Row>
+    <Row className="center-y flex-none / overflow-x-auto overflow-y-hidden bg-gray-500 w-11/12 h-c-324">
+      {/* Picker or Adder */}
+      {children}
+    </Row>
+  </Column>)
+
+const Circle = ({ children }) => (
+  <div className="flex items-center justify-center rounded-full h-32 w-32 bg-gray-100">
+    {children}
+  </div>)
+
+const ProfileImage = () => (
+  <Circle>
+    <IconContext.Provider value={{ color: "gray", className: "global-class-name", size: "5em" }}>
+      <AiOutlineUser />
+    </IconContext.Provider>
+  </Circle>)
+
+// -- Logic
+
+const ProfilePicker = ({ model, update }) => (
+  <Frame button={<Button onClick={() => update({ type: 'CHANGE_TO_ADDER_MODE' })}>Add user</Button>} title="Seleccione un usuario">
+    {model.profiles.map((profile, i) =>
+      (<ProfileCard key={i}>
+        <ProfileImage />
+        <NavLink to="/home">
+          <p>Username: {profile.username}</p>
+        </NavLink>
+        <Button onClick={() => update({ type: 'DELETE_USER', payload: profile.username })}>Delete</Button>
+      </ProfileCard>)
+    )}
+  </Frame>)
+
+const ProfileAdder = ({ model, update }) => (
+  <Frame button={<Button onClick={() => update({ type: 'CHANGE_TO_PICKER_MODE' })}>Pick user</Button>} title="Escriba el nombre del nuevo usuario">
+    <Column className="center-x / w-full">
+      <ProfileCard>
+        <ProfileImage />
+        <Input value={model.newUsername} onChange={(e) => update({ type: 'CHANGE_NEW_USERNAME', payload: e.target.value })} />
+        <Button onClick={() => update({ type: 'ADD_USER', payload: model.newUsername })}>Add</Button>
+      </ProfileCard>
+    </Column>
+  </Frame>)
+
+// -- Main
+
+const Login = ({ model, update }) => (
+  <Column className="center-x center-y / bg-gray-200 overflow-x-hidden overflow-y-auto w-screen h-screen">
+    {(() => {
+      switch (model.mode) {
+        case 'adder':
+          return <ProfileAdder {...{ model, update }} />
+        case 'picker':
+          return <ProfilePicker {...{ model, update }} />
+        default:
+          return (<div className="text-black">Invalid mode</div>)
+      }
+    })()}
+  </Column>);
+
+export default LoginController;
+
+// <button onClick={onClick} className={"bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 border border-gray-700 rounded " + className}>
+// <button onClick={onClick} className={"opacity-100 transition-opacity duration-1000 ease-out" + className}>
+// <button onClick={onClick} className={"fade-in " + className}>
+
+
+const fetchJson = (route) => new Task((rej, res) => {
+  fetch(route)
+    .then(res => res.json())
+    .then(res)
+    .catch(rej)
+})
+
+const fetchMsg = (route) => fetchJson(route)
+  .map(res => res.msg)
+
+const fetchUsers = () => fetchMsg(endpoint + "user")
+  .map(users => users.map(u => ({ username: u.name })))
+
+  // console.log(model.tasks)
+  // const data = model.tasks[0]
+  //   .filter((_, index) => index < 500)
+  //   .map((dataPoint, index) => ({ name: index + 1, uv: dataPoint }))
+  // const data1 = model.tasks[0]
+  //   .filter((_, index) => index >= 500 && index < 1000)
+  //   .map((dataPoint, index) => ({ name: index + 1, uv: dataPoint }))
+  // const data2 = model.tasks[0]
+  //   .filter((_, index) => index >= 1000 && index < 1500)
+  //   .map((dataPoint, index) => ({ name: index + 1, uv: dataPoint }))
+  // console.log(data)
+
+  // const renderLineChart = data => (
+  //   <LineChart width={800} height={250} data={data}>
+  //     <Line type="monotone" dataKey="uv" stroke="#8884d8" dot={false} />
+  //     <CartesianGrid stroke="#ccc" />
+  //     <XAxis dataKey="name" />
+  //     <YAxis />
+  //   </LineChart>
+  // );
+
+  // return (
+  //   <Column className="overflow-y-auto w-full py-5 center-x bg-gray-400">
+  //     {renderLineChart(data)}
+  //     {/* {renderLineChart(data1)}
+  //     {renderLineChart(data2)} */}
+  //   </Column>)

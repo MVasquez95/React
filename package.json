@@ -4,17 +4,25 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "data.task": "^3.1.2",
     "node-sass": "^4.13.0",
+    "pondjs": "^0.9.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-icons": "^3.8.0",
     "react-modal": "^3.11.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "react-timeseries-charts": "^0.16.1",
     "react-unity-webgl": "^7.1.8",
-    "sass-loader": "^8.0.0"
+    "recharts": "^1.8.5",
+    "sass-loader": "^8.0.0",
+    "tailwindcss-animatecss": "^1.0.4"
   },
   "scripts": {
+    "build:tailwind": "tailwindcss build src/tailwind.css -o src/tailwind.generated.css",
+    "prestart": "npm run build:tailwind",
+    "prebuild": "npm run build:tailwind",
     "start": "PORT=3006 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -34,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^1.4.6"
   }
 }
